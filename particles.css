@@ -1,0 +1,53 @@
+/* ─── Particle canvas ─── */
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 2;
+  opacity: .85;
+}
+
+/* ─── DOM-based floating embers ─── */
+.ember {
+  position: fixed;
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 3;
+  animation: ember-rise linear forwards;
+}
+@keyframes ember-rise {
+  0%   { transform: translateY(0) translateX(0) scale(1); opacity: .9; }
+  50%  { transform: translateY(-40vh) translateX(var(--drift)) scale(.7); opacity: .5; }
+  100% { transform: translateY(-80vh) translateX(calc(var(--drift)*2)) scale(.2); opacity: 0; }
+}
+
+/* ─── Burst particles (on actions) ─── */
+.burst-particle {
+  position: fixed;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 50;
+  animation: burst-fly var(--dur, .8s) ease forwards;
+}
+@keyframes burst-fly {
+  0%   { transform: translate(0,0) scale(1); opacity: 1; }
+  100% { transform: translate(var(--tx),var(--ty)) scale(0); opacity: 0; }
+}
+
+/* ─── Sparkle ring on level up ─── */
+.sparkle-ring {
+  position: fixed;
+  border-radius: 50%;
+  border: 2px solid var(--c-arcane);
+  pointer-events: none;
+  z-index: 60;
+  animation: sparkle-ring-expand .8s ease forwards;
+}
+@keyframes sparkle-ring-expand {
+  0%   { transform: translate(-50%,-50%) scale(0); opacity: 1; }
+  100% { transform: translate(-50%,-50%) scale(3); opacity: 0; }
+}
