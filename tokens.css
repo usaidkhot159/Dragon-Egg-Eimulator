@@ -1,0 +1,72 @@
+:root {
+  /* ── Palette ── */
+  --c-void:       #07060F;   /* deepest background */
+  --c-abyss:      #0D0B1A;   /* dark panels */
+  --c-deep:       #131029;   /* mid-dark */
+  --c-dusk:       #1E1836;   /* card bg */
+  --c-mist:       #2A2448;   /* borders */
+  --c-stone:      #4A4270;   /* muted text */
+  --c-silver:     #9E97C4;   /* secondary text */
+  --c-moon:       #D4CEEE;   /* primary text */
+  --c-star:       #F0ECFF;   /* headings */
+
+  /* Accent: ember gold */
+  --c-ember:      #E8A030;
+  --c-ember-dim:  #7A4A08;
+  --c-ember-glow: rgba(232,160,48,.25);
+
+  /* Accent: arcane violet */
+  --c-arcane:     #9B5CF6;
+  --c-arcane-dim: #4A1A8A;
+  --c-arcane-glow:rgba(155,92,246,.20);
+
+  /* Accent: fire red */
+  --c-fire:       #E84040;
+  --c-fire-dim:   #7A0808;
+
+  /* Accent: frost teal */
+  --c-frost:      #40C8E8;
+  --c-frost-dim:  #084A5A;
+
+  /* Accent: venom green */
+  --c-venom:      #58E840;
+  --c-venom-dim:  #1A5A08;
+
+  /* Stat colors */
+  --c-warmth:  #FF7840;
+  --c-bond:    #E040C8;
+  --c-energy:  #FFD040;
+  --c-nourish: #40E870;
+
+  /* ── Typography ── */
+  --font-display: 'Cinzel Decorative', serif;
+  --font-title:   'Cinzel', serif;
+  --font-body:    'Crimson Pro', Georgia, serif;
+
+  /* ── Spacing ── */
+  --sp-1: 4px;
+  --sp-2: 8px;
+  --sp-3: 12px;
+  --sp-4: 16px;
+  --sp-5: 24px;
+  --sp-6: 32px;
+  --sp-7: 48px;
+  --sp-8: 64px;
+
+  /* ── Radii ── */
+  --r-sm: 4px;
+  --r-md: 8px;
+  --r-lg: 16px;
+  --r-xl: 24px;
+  --r-pill: 999px;
+
+  /* ── Shadows ── */
+  --shadow-panel: 0 8px 40px rgba(0,0,0,.6), 0 2px 8px rgba(0,0,0,.4);
+  --shadow-ember: 0 0 24px var(--c-ember-glow), 0 0 60px var(--c-ember-glow);
+  --shadow-arcane:0 0 24px var(--c-arcane-glow), 0 0 60px var(--c-arcane-glow);
+
+  /* ── Transitions ── */
+  --t-fast: 120ms ease;
+  --t-mid:  240ms ease;
+  --t-slow: 500ms cubic-bezier(.4,0,.2,1);
+}
