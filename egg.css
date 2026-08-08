@@ -1,0 +1,125 @@
+/* ─── Egg Pedestal ─── */
+.egg-pedestal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+
+.pedestal-base {
+  width: 180px;
+  height: 24px;
+  background: linear-gradient(to bottom, var(--c-mist), var(--c-abyss));
+  border-radius: 50%;
+  box-shadow: 0 8px 30px rgba(0,0,0,.8);
+  margin-top: -8px;
+}
+
+.pedestal-glow {
+  position: absolute;
+  width: 220px;
+  height: 220px;
+  border-radius: 50%;
+  background: radial-gradient(circle, var(--c-ember-glow) 0%, transparent 70%);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  transition: background var(--t-slow);
+  animation: pedestal-pulse 3s ease-in-out infinite;
+}
+
+/* ─── Dragon Container ─── */
+.dragon-container {
+  position: relative;
+  width: 240px;
+  height: 280px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: transform var(--t-mid);
+}
+.dragon-container:hover { transform: scale(1.04); }
+.dragon-container:active { transform: scale(.97); }
+
+/* ─── SVG Dragon/Egg ─── */
+.dragon-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 0 20px currentColor);
+  transition: filter var(--t-slow), transform var(--t-slow);
+}
+
+/* ─── Egg crack overlays ─── */
+.egg-crack {
+  position: absolute;
+  pointer-events: none;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+}
+
+/* ─── Egg type selector ─── */
+.egg-type-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--sp-3);
+  margin: var(--sp-5) 0;
+}
+
+.egg-type-card {
+  background: var(--c-abyss);
+  border: 2px solid var(--c-mist);
+  border-radius: var(--r-lg);
+  padding: var(--sp-4) var(--sp-3);
+  text-align: center;
+  cursor: pointer;
+  transition: border-color var(--t-mid), box-shadow var(--t-mid), transform var(--t-mid);
+}
+.egg-type-card:hover {
+  border-color: var(--c-silver);
+  transform: translateY(-2px);
+}
+.egg-type-card--selected {
+  border-color: var(--c-ember) !important;
+  box-shadow: var(--shadow-ember);
+}
+.egg-type-icon { font-size: 2.2rem; margin-bottom: var(--sp-2); }
+.egg-type-name {
+  font-family: var(--font-title);
+  font-size: .75rem;
+  font-weight: 600;
+  letter-spacing: .08em;
+  color: var(--c-moon);
+}
+.egg-type-trait {
+  font-size: .7rem;
+  color: var(--c-stone);
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* ─── Name input ─── */
+.name-input-wrap {
+  position: relative;
+  margin-bottom: var(--sp-5);
+}
+.name-input {
+  width: 100%;
+  padding: var(--sp-3) var(--sp-4);
+  font-family: var(--font-title);
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: var(--c-star);
+  text-align: center;
+  background: var(--c-abyss);
+  border: 2px solid var(--c-mist);
+  border-radius: var(--r-md);
+  letter-spacing: .05em;
+  transition: border-color var(--t-mid), box-shadow var(--t-mid);
+}
+.name-input:focus {
+  border-color: var(--c-ember);
+  box-shadow: var(--shadow-ember);
+}
+.name-input::placeholder { color: var(--c-stone); font-style: italic; }
