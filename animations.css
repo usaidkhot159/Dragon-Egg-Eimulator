@@ -1,0 +1,143 @@
+/* ─── Keyframes ─── */
+
+@keyframes float {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-14px); }
+}
+
+@keyframes pedestal-pulse {
+  0%, 100% { opacity: .6; transform: translate(-50%,-50%) scale(1); }
+  50%       { opacity: 1;  transform: translate(-50%,-50%) scale(1.12); }
+}
+
+@keyframes stage-pulse {
+  0%, 100% { box-shadow: 0 0 8px var(--c-ember); }
+  50%       { box-shadow: 0 0 20px var(--c-ember), 0 0 40px var(--c-ember-glow); }
+}
+
+@keyframes shimmer {
+  0%   { transform: translateX(-100%); }
+  60%  { transform: translateX(100%); }
+  100% { transform: translateX(100%); }
+}
+
+@keyframes log-in {
+  from { opacity: 0; transform: translateX(-8px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes toast-in {
+  from { opacity: 0; transform: translateY(16px) scale(.92); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+@keyframes toast-out {
+  from { opacity: 1; transform: translateY(0) scale(1); }
+  to   { opacity: 0; transform: translateY(-12px) scale(.92); }
+}
+
+@keyframes modal-in {
+  from { opacity: 0; transform: translateY(20px) scale(.96); }
+  to   { opacity: 1; transform: translateY(0) scale(1); }
+}
+
+@keyframes ticker-in {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes ability-appear {
+  from { opacity: 0; transform: translateX(-12px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes evo-bg-pulse {
+  0%, 100% { opacity: .6; }
+  50%       { opacity: 1; }
+}
+@keyframes evo-panel-in {
+  from { opacity: 0; transform: scale(.8) translateY(30px); }
+  to   { opacity: 1; transform: scale(1) translateY(0); }
+}
+@keyframes evo-icon-spin {
+  from { transform: scale(1) rotate(-8deg); }
+  to   { transform: scale(1.12) rotate(8deg); }
+}
+
+/* ─── Dragon idle animations ─── */
+@keyframes egg-wobble {
+  0%, 100% { transform: rotate(0deg); }
+  20%       { transform: rotate(-4deg); }
+  40%       { transform: rotate(4deg); }
+  60%       { transform: rotate(-2deg); }
+  80%       { transform: rotate(2deg); }
+}
+@keyframes egg-glow-pulse {
+  0%, 100% { filter: drop-shadow(0 0 10px currentColor); }
+  50%       { filter: drop-shadow(0 0 28px currentColor) drop-shadow(0 0 50px currentColor); }
+}
+@keyframes hatchling-bounce {
+  0%, 100% { transform: translateY(0) scaleY(1); }
+  40%       { transform: translateY(-10px) scaleY(1.05); }
+  60%       { transform: translateY(-8px) scaleY(1.03); }
+}
+@keyframes juvenile-breathe {
+  0%, 100% { transform: scaleX(1) scaleY(1); }
+  50%       { transform: scaleX(1.04) scaleY(.97); }
+}
+@keyframes adult-float {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  33%       { transform: translateY(-8px) rotate(1.5deg); }
+  66%       { transform: translateY(-4px) rotate(-1deg); }
+}
+@keyframes ancient-aura {
+  0%, 100% { filter: drop-shadow(0 0 20px currentColor) brightness(1); }
+  50%       { filter: drop-shadow(0 0 50px currentColor) drop-shadow(0 0 80px currentColor) brightness(1.2); }
+}
+
+/* ─── Crack animation ─── */
+@keyframes crack-appear {
+  from { opacity: 0; stroke-dashoffset: 100; }
+  to   { opacity: 1; stroke-dashoffset: 0; }
+}
+
+/* ─── Hatching burst ─── */
+@keyframes hatch-burst {
+  0%   { transform: scale(0); opacity: 1; }
+  70%  { transform: scale(1.4); opacity: .7; }
+  100% { transform: scale(2); opacity: 0; }
+}
+
+/* ─── Screen transition ─── */
+.screen { transition: opacity var(--t-slow); }
+
+/* ─── Stat bar flash ─── */
+@keyframes stat-flash {
+  0%   { filter: brightness(1); }
+  50%  { filter: brightness(2.5); }
+  100% { filter: brightness(1); }
+}
+.stat-flash { animation: stat-flash .4s ease; }
+
+/* ─── Action button feedback ─── */
+@keyframes action-pop {
+  0%   { transform: scale(1); }
+  40%  { transform: scale(.88); }
+  80%  { transform: scale(1.08); }
+  100% { transform: scale(1); }
+}
+.action-pop { animation: action-pop .3s ease; }
+
+/* ─── XP gain flash ─── */
+@keyframes xp-flash {
+  0%   { opacity: 1; }
+  50%  { opacity: .4; }
+  100% { opacity: 1; }
+}
+
+/* ─── Reduced motion ─── */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: .01ms !important;
+    transition-duration: .01ms !important;
+  }
+}
