@@ -1,0 +1,172 @@
+/* ─── Body & Canvas ─── */
+body {
+  background: var(--c-void);
+  color: var(--c-moon);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  line-height: 1.5;
+  position: relative;
+  overflow: hidden;
+}
+
+#particle-canvas {
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ─── Realm background layers ─── */
+.realm-bg {
+  position: fixed;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.realm-layer {
+  position: absolute;
+  inset: 0;
+}
+.realm-layer--stars {
+  background:
+    radial-gradient(1px 1px at 10% 20%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 30% 60%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 50% 15%, rgba(255,255,255,.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 70% 45%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 90% 80%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 20% 85%, rgba(255,255,255,.4) 0%, transparent 100%),
+    radial-gradient(1px 1px at 80% 10%, rgba(255,255,255,.5) 0%, transparent 100%),
+    radial-gradient(1px 1px at 55% 55%, rgba(200,180,255,.6) 0%, transparent 100%),
+    radial-gradient(1px 1px at 45% 90%, rgba(255,255,255,.3) 0%, transparent 100%),
+    radial-gradient(1px 1px at 15% 50%, rgba(255,255,255,.4) 0%, transparent 100%);
+}
+.realm-layer--mist {
+  background: radial-gradient(ellipse 80% 50% at 50% 100%, rgba(30,24,54,.8) 0%, transparent 70%);
+}
+.realm-layer--embers {
+  background: radial-gradient(ellipse 60% 40% at 50% 110%, rgba(232,160,48,.06) 0%, transparent 60%);
+}
+
+/* ─── Screens ─── */
+.screen {
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--t-slow);
+}
+.screen--active {
+  opacity: 1;
+  pointer-events: all;
+}
+.screen--overlay {
+  z-index: 80;
+  background: rgba(7,6,15,.85);
+  backdrop-filter: blur(8px);
+}
+
+/* ─── Game layout ─── */
+#screen-game {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  align-items: stretch;
+  padding: 0;
+}
+
+.hud-top {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  padding: var(--sp-3) var(--sp-5);
+  background: linear-gradient(to bottom, rgba(13,11,26,.98) 0%, rgba(13,11,26,.80) 100%);
+  border-bottom: 1px solid var(--c-mist);
+  z-index: 20;
+  flex-shrink: 0;
+}
+
+.game-main {
+  display: grid;
+  grid-template-columns: 220px 1fr 220px;
+  height: 100%;
+  overflow: hidden;
+  position: relative;
+  z-index: 10;
+}
+
+.hud-bottom {
+  display: flex;
+  align-items: center;
+  gap: var(--sp-5);
+  padding: var(--sp-3) var(--sp-5);
+  background: linear-gradient(to top, rgba(13,11,26,.98) 0%, rgba(13,11,26,.80) 100%);
+  border-top: 1px solid var(--c-mist);
+  z-index: 20;
+  flex-shrink: 0;
+}
+
+/* ─── Side panels ─── */
+.side-panel {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+  background: linear-gradient(to right, rgba(13,11,26,.95) 0%, rgba(13,11,26,.70) 100%);
+  border-right: 1px solid var(--c-mist);
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+.side-panel--right {
+  background: linear-gradient(to left, rgba(13,11,26,.95) 0%, rgba(13,11,26,.70) 100%);
+  border-right: none;
+  border-left: 1px solid var(--c-mist);
+}
+.side-title {
+  font-family: var(--font-title);
+  font-size: .85rem;
+  font-weight: 600;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  color: var(--c-ember);
+  border-bottom: 1px solid var(--c-ember-dim);
+  padding-bottom: var(--sp-2);
+}
+
+/* ─── Center stage ─── */
+.center-stage {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-5);
+  position: relative;
+  overflow: hidden;
+}
+
+/* ─── Panels (title/name screens) ─── */
+.panel {
+  background: var(--c-dusk);
+  border: 1px solid var(--c-mist);
+  border-radius: var(--r-xl);
+  padding: var(--sp-7) var(--sp-8);
+  box-shadow: var(--shadow-panel);
+  max-width: 560px;
+  width: 90%;
+}
+.panel--center { text-align: center; }
+.panel-title {
+  font-family: var(--font-display);
+  font-size: 1.6rem;
+  color: var(--c-star);
+  margin-bottom: var(--sp-3);
+}
+.panel-desc {
+  color: var(--c-silver);
+  font-size: 1.1rem;
+  font-style: italic;
+  margin-bottom: var(--sp-6);
+}
