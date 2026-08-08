@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Dragon Egg Simulator — Hatch Your Legend</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@400;700;900&family=Cinzel:wght@400;600;700&family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,300;1,400&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/reset.css" />
+  <link rel="stylesheet" href="css/tokens.css" />
+  <link rel="stylesheet" href="css/layout.css" />
+  <link rel="stylesheet" href="css/egg.css" />
+  <link rel="stylesheet" href="css/dragon.css" />
+  <link rel="stylesheet" href="css/ui.css" />
+  <link rel="stylesheet" href="css/animations.css" />
+  <link rel="stylesheet" href="css/particles.css" />
+</head>
+<body class="realm-dark" id="app-body">
+
+  <!-- Particle canvas -->
+  <canvas id="particle-canvas"></canvas>
+
+  <!-- Ambient background layers -->
+  <div class="realm-bg">
+    <div class="realm-layer realm-layer--stars"></div>
+    <div class="realm-layer realm-layer--mist"></div>
+    <div class="realm-layer realm-layer--embers"></div>
+  </div>
+
+  <!-- ───── SCREEN: TITLE ───── -->
+  <section id="screen-title" class="screen screen--active">
+    <div class="title-content">
+      <div class="title-rune">🐉</div>
+      <h1 class="title-headline">
+        <span class="title-sub">Adopt Your</span>
+        Dragon Egg
+      </h1>
+      <p class="title-lore">
+        Deep in the Ember Peaks, an egg pulses with ancient fire.<br />
+        Its fate rests in your hands, Keeper.
+      </p>
+      <button class="btn btn--primary btn--lg" id="btn-begin">
+        <span class="btn-inner">Claim Your Egg</span>
+        <span class="btn-shimmer"></span>
+      </button>
+      <p class="title-note">Each egg is unique. No two dragons are alike.</p>
+    </div>
+  </section>
+
+  <!-- ───── SCREEN: NAME YOUR EGG ───── -->
+  <section id="screen-name" class="screen">
+    <div class="panel panel--center">
+      <h2 class="panel-title">Name Your Dragon</h2>
+      <p class="panel-desc">The name you choose will echo through the ages.</p>
+      <div class="name-input-wrap">
+        <input type="text" id="dragon-name-input" class="name-input" placeholder="Enter a name..." maxlength="20" />
+        <span class="name-input-border"></span>
+      </div>
+      <div class="egg-type-grid" id="egg-type-grid">
+        <!-- Egg type cards injected by JS -->
+      </div>
+      <button class="btn btn--primary" id="btn-confirm-name" disabled>
+        <span class="btn-inner">Seal the Bond</span>
+        <span class="btn-shimmer"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ───── SCREEN: MAIN GAME ───── -->
+  <section id="screen-game" class="screen">
+
+    <!-- Top HUD -->
+    <header class="hud-top">
+      <div class="hud-dragon-info">
+        <span class="hud-name" id="hud-name">—</span>
+        <span class="hud-stage" id="hud-stage">Egg</span>
+      </div>
+      <div class="hud-stats">
+        <div class="stat-bar-wrap">
+          <label class="stat-label">🔥 Warmth</label>
+          <div class="stat-bar"><div class="stat-fill stat-fill--warmth" id="stat-warmth"></div></div>
+          <span class="stat-val" id="val-warmth">100</span>
+        </div>
+        <div class="stat-bar-wrap">
+          <label class="stat-label">💖 Bond</label>
+          <div class="stat-bar"><div class="stat-fill stat-fill--bond" id="stat-bond"></div></div>
+          <span class="stat-val" id="val-bond">50</span>
+        </div>
+        <div class="stat-bar-wrap">
+          <label class="stat-label">⚡ Energy</label>
+          <div class="stat-bar"><div class="stat-fill stat-fill--energy" id="stat-energy"></div></div>
+          <span class="stat-val" id="val-energy">80</span>
+        </div>
+        <div class="stat-bar-wrap">
+          <label class="stat-label">🌿 Nourish</label>
+          <div class="stat-bar"><div class="stat-fill stat-fill--nourish" id="stat-nourish"></div></div>
+          <span class="stat-val" id="val-nourish">70</span>
+        </div>
+      </div>
+      <div class="hud-xp">
+        <label class="stat-label">⭐ XP</label>
+        <div class="xp-bar"><div class="xp-fill" id="xp-fill"></div></div>
+        <span class="xp-text" id="xp-text">0 / 100</span>
+      </div>
+    </header>
+
+    <!-- Main viewport -->
+    <main class="game-main">
+
+      <!-- Left panel: abilities & evolution -->
+      <aside class="side-panel side-panel--left">
+        <h3 class="side-title">Abilities</h3>
+        <ul class="ability-list" id="ability-list">
+          <li class="ability-item ability-item--locked">???</li>
+        </ul>
+        <div class="evolution-path" id="evolution-path">
+          <!-- Injected by JS -->
+        </div>
+      </aside>
+
+      <!-- Center: Dragon/Egg display -->
+      <div class="center-stage">
+        <div class="egg-pedestal">
+          <div class="pedestal-glow" id="pedestal-glow"></div>
+          <div class="dragon-container" id="dragon-container">
+            <!-- SVG or canvas injected here -->
+          </div>
+          <div class="pedestal-base"></div>
+        </div>
+
+        <!-- Action buttons -->
+        <div class="action-ring" id="action-ring">
+          <button class="action-btn" id="act-warmth" title="Warm the Egg">
+            <span class="action-icon">🔥</span>
+            <span class="action-label">Warm</span>
+          </button>
+          <button class="action-btn" id="act-bond" title="Whisper to your dragon">
+            <span class="action-icon">💬</span>
+            <span class="action-label">Bond</span>
+          </button>
+          <button class="action-btn" id="act-feed" title="Offer a treat">
+            <span class="action-icon">🍖</span>
+            <span class="action-label">Feed</span>
+          </button>
+          <button class="action-btn" id="act-play" title="Play together">
+            <span class="action-icon">⚡</span>
+            <span class="action-label">Play</span>
+          </button>
+          <button class="action-btn" id="act-train" title="Train abilities">
+            <span class="action-icon">🗡️</span>
+            <span class="action-label">Train</span>
+          </button>
+          <button class="action-btn" id="act-sleep" title="Rest">
+            <span class="action-icon">🌙</span>
+            <span class="action-label">Rest</span>
+          </button>
+        </div>
+
+        <!-- Stage indicator -->
+        <div class="stage-progress" id="stage-progress">
+          <!-- Stage dots injected -->
+        </div>
+      </div>
+
+      <!-- Right panel: log & lore -->
+      <aside class="side-panel side-panel--right">
+        <h3 class="side-title">Chronicle</h3>
+        <div class="chronicle-log" id="chronicle-log">
+          <p class="log-entry log-entry--system">Your journey begins...</p>
+        </div>
+        <div class="lore-card" id="lore-card">
+          <h4 class="lore-title" id="lore-title">The Egg Stirs</h4>
+          <p class="lore-text" id="lore-text">Ancient warmth radiates from within. Something extraordinary waits to be born.</p>
+        </div>
+      </aside>
+    </main>
+
+    <!-- Bottom: time & world events -->
+    <footer class="hud-bottom">
+      <div class="time-info">
+        <span class="time-label">Day</span>
+        <span class="time-val" id="game-day">1</span>
+        <span class="time-season" id="game-season">🌸 Spring</span>
+      </div>
+      <div class="event-ticker" id="event-ticker">
+        <span class="ticker-msg" id="ticker-msg">The world holds its breath...</span>
+      </div>
+      <div class="hud-actions-right">
+        <button class="hud-btn" id="btn-tome">📖 Tome</button>
+        <button class="hud-btn" id="btn-reset">↩ New Egg</button>
+      </div>
+    </footer>
+
+  </section>
+
+  <!-- ───── SCREEN: EVOLUTION EVENT ───── -->
+  <section id="screen-evolution" class="screen screen--overlay">
+    <div class="evo-backdrop"></div>
+    <div class="evo-panel">
+      <div class="evo-icon" id="evo-icon">🥚</div>
+      <h2 class="evo-title" id="evo-title">Evolution!</h2>
+      <p class="evo-desc" id="evo-desc">Your dragon grows stronger...</p>
+      <div class="evo-new-ability" id="evo-new-ability" style="display:none">
+        <span class="evo-ability-label">New Ability Learned:</span>
+        <span class="evo-ability-name" id="evo-ability-name">—</span>
+      </div>
+      <button class="btn btn--primary" id="btn-evo-continue">
+        <span class="btn-inner">Witness the Change</span>
+        <span class="btn-shimmer"></span>
+      </button>
+    </div>
+  </section>
+
+  <!-- ───── MODAL: DRAGON TOME ───── -->
+  <div id="modal-tome" class="modal" role="dialog" aria-modal="true" aria-label="Dragon Tome">
+    <div class="modal-backdrop"></div>
+    <div class="modal-panel">
+      <button class="modal-close" id="btn-close-tome">✕</button>
+      <h2 class="modal-title">Dragon Tome</h2>
+      <div class="tome-tabs">
+        <button class="tome-tab tome-tab--active" data-tab="stats">Stats</button>
+        <button class="tome-tab" data-tab="abilities">Abilities</button>
+        <button class="tome-tab" data-tab="history">History</button>
+        <button class="tome-tab" data-tab="lore">Lore</button>
+      </div>
+      <div class="tome-content" id="tome-content">
+        <!-- Injected by JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Toast notifications -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/config.js"></script>
+  <script src="js/state.js"></script>
+  <script src="js/dragon-types.js"></script>
+  <script src="js/abilities.js"></script>
+  <script src="js/events.js"></script>
+  <script src="js/renderer.js"></script>
+  <script src="js/particles.js"></script>
+  <script src="js/ui.js"></script>
+  <script src="js/actions.js"></script>
+  <script src="js/progression.js"></script>
+  <script src="js/tome.js"></script>
+  <script src="js/ticker.js"></script>
+  <script src="js/save.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
